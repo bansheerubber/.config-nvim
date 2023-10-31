@@ -1,17 +1,6 @@
 local colors = {
-	black        = '#282828',
-	white        = '#ebdbb2',
-	red          = '#fb4934',
-	green        = '#b8bb26',
-	blue         = '#83a598',
-	yellow       = '#fe8019',
-	gray         = '#a89984',
-	darkgray     = '#3c3836',
-	lightgray    = '#504945',
-	inactivegray = '#7c6f64',
-
-	background   = '#1B121F',
-	foreground   = '#B7ACB7',
+	background = '#1B121F',
+	foreground = '#D3C6D3',
 }
 
 local theme = {
@@ -47,6 +36,65 @@ local theme = {
 	},
 }
 
+local lualine_a = { { 'mode', fmt = function(str) return str:lower() end } }
+
+local branch = {
+	'branch',
+	fmt = function(str)
+		if str == "" then
+			return ""
+		end
+
+		if #str > 20 then
+			str = str:sub(1, 20) .. "..."
+		end
+
+		return " " .. str
+	end
+}
+
+local diff = 'diff'
+
+local diagnostics = {
+	'diagnostics',
+	symbols = {
+		error = "√",
+		hint = "∘",
+		info = "∘",
+		warn = "∫",
+	},
+}
+
+local lualine_b = { branch, diff, diagnostics }
+
+local lualine_c = { {
+	'filename',
+	path = 1,
+	symbols = {
+		modified = "≈",
+		readonly = "∿",
+		unnamed = "no name",
+		newfile = "new file",
+	}
+} }
+
+local lualine_x = { 'encoding', {
+	'fileformat',
+	fmt = function(str)
+		if str == "unix" then
+			return "lf"
+		elseif str == "mac" then
+			return "cr"
+		elseif str == "dos" then
+			return "crlf"
+		end
+
+		return str
+	end
+}, 'filetype' }
+
+local lualine_y = { 'searchcount', }
+
 require('lualine').setup({
 	options = {
 		icons_enabled = false,
@@ -58,18 +106,18 @@ require('lualine').setup({
 		},
 	},
 	sections = {
-		lualine_a = { { 'mode', fmt = function(str) return str:lower() end } },
-		lualine_b = { 'branch', 'diff', 'diagnostics' },
-		lualine_c = { 'filename' },
-		lualine_x = { 'encoding', 'fileformat', 'filetype' },
-		lualine_y = { 'searchcount', },
+		lualine_a = lualine_a,
+		lualine_b = lualine_b,
+		lualine_c = lualine_c,
+		lualine_x = lualine_x,
+		lualine_y = lualine_y,
 		lualine_z = {},
 	},
 	inactive_sections = {
 		lualine_a = {},
-		lualine_b = {},
-		lualine_c = { 'filename' },
-		lualine_x = { 'location' },
+		lualine_b = { diff, diagnostics },
+		lualine_c = lualine_c,
+		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {},
 	},
