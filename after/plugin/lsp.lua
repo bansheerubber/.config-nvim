@@ -3,7 +3,12 @@ local lsp = require('lsp-zero')
 lsp.preset('recommended')
 
 lsp.set_preferences({
-	sign_icons = {},
+	sign_icons = {
+		error = "√",
+		hint = "∘",
+		info = "∘",
+		warn = "∫",
+	},
 })
 
 VirtualLines = true
@@ -33,7 +38,7 @@ lsp.on_attach(function(_, bufnr)
 	vim.diagnostic.config({
 		virtual_lines = false,
 		virtual_text = {
-			prefix = '!',
+			prefix = '√',
 			severity = vim.diagnostic.severity.ERROR,
 		},
 		update_in_insert = true,
@@ -58,18 +63,9 @@ end)
 lsp.setup()
 
 local cmp = require('cmp')
-local luasnip = require('luasnip')
-
-require('luasnip.loaders.from_vscode').lazy_load()
-luasnip.config.setup({})
 
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	},
-	mapping = cmp.mapping.preset.insert {
+	mapping = {
 		['<Tab>'] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.confirm({
@@ -81,11 +77,66 @@ cmp.setup({
 			end
 		end, { 'i', 's' }),
 	},
+	formatting = {
+		fields = { 'menu', 'abbr', 'kind' },
+		format = function(entry, item)
+			local menu_icon = {
+				copilot                 = '₹',
+				nvim_lsp_signature_help = '∢',
+				nvim_lsp                = '∿',
+				nvim_lua                = '⅂',
+				buffer                  = '∀',
+				path                    = '∃',
+			}
+
+			local kinds = {
+				Text          = ' text',
+				Method        = 'methd',
+				Function      = ' func',
+				Constructor   = 'cnruc',
+				Field         = 'field',
+				Variable      = '  var',
+				Class         = 'class',
+				Interface     = 'intrf',
+				Module        = '  mod',
+				Property      = ' prop',
+				Unit          = ' unit',
+				Value         = '  val',
+				Enum          = ' enum',
+				Keyword       = 'kywrd',
+				Snippet       = ' snip',
+				Color         = 'color',
+				File          = ' file',
+				Reference     = '  ref',
+				Folder        = 'foldr',
+				EnumMember    = 'varnt',
+				Constant      = 'const',
+				Struct        = 'strct',
+				Event         = 'evnet',
+				Operator      = 'oprtr',
+				TypeParameter = ' type',
+			}
+
+			item.kind = kinds[item.kind]
+			item.menu = menu_icon[entry.source.name]
+			return item
+		end,
+	},
 	sources = {
-		{ name = 'luasnip' },
 		{ name = 'nvim_lsp' },
+		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'nvim_lua' },
+		{ name = 'copilot', },
 		{ name = 'buffer' },
 		{ name = 'path' },
+	},
+	window = {
+		completion = {
+			winhighlight = "Normal:CmpNormal,FloatBorder:CmpFloatBorder,CursorLine:CmpCursorLine,Search:CmpSearch",
+		},
+		documentation = {
+			border = false,
+			winhighlight = "Normal:CmpDocNormal,FloatBorder:CmpDocFloatBorder",
+		},
 	},
 })
