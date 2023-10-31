@@ -14,9 +14,13 @@ vim.keymap.set("v", "`", "<ESC>i")
 vim.keymap.set("n", "<C-Left>", "b")
 vim.keymap.set("n", "<C-Right>", "w")
 
+-- window management keybinds
+vim.keymap.set({ "n", "v", }, "<C-q>", "<C-w>", { noremap = true })
+vim.keymap.set("i", "<C-q>", "<C-C><C-w>", { noremap = true })
+
 -- delete backward one word
-vim.keymap.set("i", "<C-w>", [[<C-\><C-o>"_db]])
-vim.keymap.set("n", "<C-w>", [["_db]])
+vim.keymap.set("i", "<C-w>", [[<C-\><C-o>"_db]], { noremap = true })
+vim.keymap.set("n", "<C-w>", [["_db]], { noremap = true })
 
 -- ctrl+s to save
 vim.keymap.set("n", "<C-s>", ":w<CR>")
