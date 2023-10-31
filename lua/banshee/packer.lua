@@ -2,28 +2,28 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
 	-- Packer can manage itself
-	use 'wbthomason/packer.nvim'
+	use('wbthomason/packer.nvim')
 
-	use {
+	use({
 		'nvim-telescope/telescope.nvim', tag = '0.1.3',
 		-- or                            , branch = '0.1.x',
 		requires = { { 'nvim-lua/plenary.nvim' } }
-	}
+	})
 
-	use {
-		"nvim-telescope/telescope-frecency.nvim",
+	use({
+		'nvim-telescope/telescope-frecency.nvim',
 		config = function()
-			require("telescope").load_extension "frecency"
+			require('telescope').load_extension 'frecency'
 		end,
-	}
+	})
 
-	use {
-		"nvim-telescope/telescope-file-browser.nvim",
-		requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+	use({
+		'nvim-telescope/telescope-file-browser.nvim',
+		requires = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
 		config = function()
-			require("telescope").load_extension "file_browser"
+			require('telescope').load_extension 'file_browser'
 		end,
-	}
+	})
 
 	use({
 		'rmagatti/auto-session',
@@ -47,7 +47,7 @@ return require('packer').startup(function(use)
 	use('/home/me/Projects/bansheescheme.nvim')
 	-- use('/home/me/Projects/better-tabs.nvim/')
 
-	use {
+	use({
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v1.x',
 		requires = {
@@ -68,7 +68,7 @@ return require('packer').startup(function(use)
 			{ 'L3MON4D3/LuaSnip' },
 			{ 'rafamadriz/friendly-snippets' },
 		}
-	}
+	})
 
 	use({
 		'zbirenbaum/copilot-cmp',
@@ -91,9 +91,9 @@ return require('packer').startup(function(use)
 	})
 
 	use({
-		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
 		config = function()
-			require("lsp_lines").setup()
+			require('lsp_lines').setup()
 		end,
 	})
 
