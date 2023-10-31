@@ -67,6 +67,10 @@ return require('packer').startup(function(use)
 		end,
 	})
 
+	use({ '/home/me/Projects/catppuccin.nvim', as = 'catppuccin' })
+
+	use('norcalli/nvim-colorizer.lua')
+
 	use('lewis6991/gitsigns.nvim')
 	use('nvim-lualine/lualine.nvim')
 end)
