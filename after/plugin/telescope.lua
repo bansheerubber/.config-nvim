@@ -2,7 +2,34 @@ local builtin = require('telescope.builtin')
 local telescope = require('telescope')
 telescope.load_extension('file_browser')
 
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-p>', builtin.find_files)
+require('telescope').setup({
+	extensions = {
+		file_browser = {
+			dir_icon = ' ',
+			grouped = true,
+			hidden = { file_browser = true, folder_browser = true },
+		},
+	},
+})
+
+vim.keymap.set(
+	{ 'n', 'i', 'v' },
+	'<C-p>',
+	function()
+		builtin.find_files({
+			no_ignore = true,
+			find_command = {
+				'rg',
+				'--files',
+				'--hidden',
+				'-g', '!.git',
+				'-g', '!node_modules',
+				'-g', '!target',
+				'-g', '!dist',
+			},
+		})
+	end
+)
 
 vim.keymap.set('n', '<leader>f',
 	'<Cmd>Telescope file_browser sorting_strategy=ascending path=%:p:h select_buffer=true<CR>')

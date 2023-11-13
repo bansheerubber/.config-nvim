@@ -5,16 +5,6 @@ require("banshee.highlight")
 
 require("os")
 
-require('telescope').setup({
-	extensions = {
-		file_browser = {
-			dir_icon = ' ',
-			grouped = true,
-			hidden = { file_browser = true, folder_browser = true },
-		},
-	},
-})
-
 vim.opt.scrolloff = 20
 vim.opt.colorcolumn = "120"
 
