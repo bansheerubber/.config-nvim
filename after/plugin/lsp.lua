@@ -34,6 +34,8 @@ vim.keymap.set(
 	{ desc = "Toggle lsp_lines" }
 )
 
+vim.keymap.set({ "n", "v", "i", }, "<M-l>", function() vim.cmd([[ LspRestart ]]) end, {})
+
 lsp.on_attach(function(_, bufnr)
 	vim.diagnostic.config({
 		virtual_lines = false,
@@ -66,7 +68,7 @@ local cmp = require('cmp')
 
 cmp.setup({
 	mapping = {
-		['<Tab>'] = cmp.mapping(function(fallback)
+		['<C-e>'] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.confirm({
 					behavior = cmp.ConfirmBehavior.Replace,
@@ -76,6 +78,8 @@ cmp.setup({
 				fallback()
 			end
 		end, { 'i', 's' }),
+		['<CR>'] = cmp.config.disable,
+		['<Tab>'] = cmp.config.disable,
 	},
 	formatting = {
 		fields = { 'menu', 'abbr', 'kind' },
