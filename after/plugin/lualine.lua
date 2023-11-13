@@ -45,8 +45,8 @@ local branch = {
 			return ""
 		end
 
-		if #str > 20 then
-			str = str:sub(1, 20) .. "..."
+		if #str > 35 then
+			str = str:sub(1, 15) .. "..." .. str:sub(#str - 15, #str)
 		end
 
 		return " " .. str
