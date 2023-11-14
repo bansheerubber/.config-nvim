@@ -75,22 +75,54 @@ end)
 local cmp = require('cmp')
 
 cmp.setup.cmdline({
+	mapping = {
+		['<C-e>'] = {
+			i = cmp.mapping.confirm({
+				behavior = cmp.ConfirmBehavior.Replace,
+				select = true
+			}),
+			c = cmp.mapping.confirm({
+				behavior = cmp.ConfirmBehavior.Replace,
+				select = true
+			}),
+		},
+		['<CR>'] = {
+			i = cmp.config.disable,
+			c = cmp.config.disable,
+		},
+		['<Tab>'] = {
+			i = cmp.mapping.disable,
+			c = cmp.mapping.disable,
+		},
+	},
+})
 
 cmp.setup({
 	mapping = {
-		['<C-e>'] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.confirm({
-					behavior = cmp.ConfirmBehavior.Replace,
-					select = true
-				})
-			else
-				fallback()
-			end
-		end, { 'i', 's' }),
-		['<CR>'] = cmp.config.disable,
-		['<Tab>'] = cmp.config.disable,
+		['<C-e>'] = {
+			i = cmp.mapping.confirm({
+				behavior = cmp.ConfirmBehavior.Replace,
+				select = true
+			}),
+			c = cmp.mapping.confirm({
+				behavior = cmp.ConfirmBehavior.Replace,
+				select = true
+			}),
+		},
+		['<C-Space>'] = {
+			i = cmp.mapping.abort(),
+			c = cmp.mapping.abort(),
+		},
+		['<CR>'] = {
+			i = cmp.config.disable,
+			c = cmp.config.disable,
+		},
+		['<Tab>'] = {
+			i = cmp.mapping.disable,
+			c = cmp.mapping.disable,
+		},
 	},
+	preselect = cmp.PreselectMode.None,
 	formatting = {
 		fields = { 'menu', 'abbr', 'kind' },
 		format = function(entry, item)
