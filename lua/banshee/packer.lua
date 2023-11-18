@@ -71,7 +71,7 @@ return require('packer').startup(function(use)
 		}
 	})
 
-	use({
+	--[[use({
 		'zbirenbaum/copilot-cmp',
 		after = { 'copilot.lua' },
 		config = function()
@@ -89,7 +89,7 @@ return require('packer').startup(function(use)
 				panel = { enabled = false },
 			})
 		end,
-	})
+	})]]--
 
 	use({
 		'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
