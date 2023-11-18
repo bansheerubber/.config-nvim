@@ -46,6 +46,14 @@ require('catppuccin').setup({
         fg = C.mauve,
         bg = C.none,
       },
+      FloatBorder = {
+        fg = colors.mauve,
+        bg = colors.crust,
+      },
+      NormalFloat = {
+        fg = colors.subtext1,
+        bg = colors.crust,
+      },
       TelescopeBorder = {
         fg = C.overlay0,
         bg = '#261A2B',
