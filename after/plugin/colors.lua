@@ -20,31 +20,31 @@ require('catppuccin').setup({
   },
   custom_highlights = function(colors)
     return {
-      ["@parameter"] = { fg = C.maroon }, 
-      ["@parameter.reference"] = { fg = C.maroon }, 
+      ["@parameter"] = { fg = colors.maroon },
+      ["@parameter.reference"] = { fg = colors.maroon },
       CmpDocNormal = {
-        fg = C.subtext1,
+        fg = colors.subtext1,
         bg = '#322238',
       },
       CmpNormal = {
-        fg = C.subtext1,
-        bg = C.crust,
+        fg = colors.subtext1,
+        bg = colors.crust,
       },
       CmpCursorLine = {
-        fg = C.subtext1,
-        bg = C.surface0,
+        fg = colors.subtext1,
+        bg = colors.surface0,
       },
       CmpItemMenu = {
-        fg = C.mauve,
-        bg = C.none,
+        fg = colors.mauve,
+        bg = colors.none,
       },
       CmpItemAbbrMatch = {
-        fg = C.mauve,
-        bg = C.none,
+        fg = colors.mauve,
+        bg = colors.none,
       },
       CmpItemAbbrMatchFuzzy = {
-        fg = C.mauve,
-        bg = C.none,
+        fg = colors.mauve,
+        bg = colors.none,
       },
       FloatBorder = {
         fg = colors.mauve,
@@ -55,16 +55,16 @@ require('catppuccin').setup({
         bg = colors.crust,
       },
       TelescopeBorder = {
-        fg = C.overlay0,
+        fg = colors.overlay0,
         bg = '#261A2B',
       },
       TelescopeNormal = {
-        fg = C.text,
+        fg = colors.text,
         bg = '#261A2B',
       },
       TelescopeSelection = {
-        fg = C.text,
-        bg = C.mantle,
+        fg = colors.text,
+        bg = colors.mantle,
       },
    }
   end,
