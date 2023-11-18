@@ -1,5 +1,14 @@
 local lsp = require('lsp-zero')
 local cmp = require('cmp')
+local lsp_signature = require('lsp_signature')
+
+lsp_signature.setup({
+	doc_lines = 0, -- TODO add keybind that toggles docs
+	handler_opts = {
+		border = "single",
+	},
+	hint_enable = false,
+})
 
 lsp.set_sign_icons({
 	error = "√",
@@ -128,7 +137,6 @@ function setcmp()
 		},
 		sources = {
 			{ name = 'nvim_lsp' },
-			{ name = 'nvim_lsp_signature_help' },
 			{ name = 'nvim_lua' },
 			-- { name = 'copilot', },
 			{ name = 'buffer' },
