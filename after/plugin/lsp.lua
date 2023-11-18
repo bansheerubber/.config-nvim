@@ -65,7 +65,7 @@ function setcmp()
 	})
 
 	cmp.setup({
-		mapping = {
+		mapping = cmp.mapping.preset.insert({
 			['<C-e>'] = {
 				i = cmp.mapping.confirm({
 					behavior = cmp.ConfirmBehavior.Replace,
@@ -88,7 +88,7 @@ function setcmp()
 				i = cmp.mapping.disable,
 				c = cmp.mapping.disable,
 			},
-		},
+		}),
 		preselect = cmp.PreselectMode.None,
 		formatting = {
 			fields = { 'menu', 'abbr', 'kind' },
@@ -169,6 +169,14 @@ require('mason-lspconfig').setup({
 })
 
 vim.keymap.set({ "n", "v", "i", }, "<M-l>", function() vim.cmd([[ LspRestart ]]) end, {})
+
+vim.api.nvim_create_augroup('setcmp', { clear = true })
+vim.api.nvim_create_autocmd({ 'VimEnter', 'BufRead', }, {
+	group = 'setcmp',
+	callback = function()
+		setcmp()
+	end,
+})
 
 lsp.on_attach(function(_, bufnr)
 	vim.diagnostic.config({
