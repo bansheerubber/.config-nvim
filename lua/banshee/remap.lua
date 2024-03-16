@@ -70,3 +70,18 @@ vim.keymap.set("n", "Q", "<nop>")
 
 -- start replacing word we're currently on
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+vim.keymap.set({ "n", "i", "v" }, "<S-Up>", "<Up>")
+vim.keymap.set({ "n", "i", "v" }, "<S-Down>", "<Down>")
+vim.keymap.set({ "n", "i", "v" }, "<S-Left>", "<Left>")
+vim.keymap.set({ "n", "i", "v" }, "<S-Right>", "<Right>")
+
+-- sort stuff
+vim.keymap.set("v", "<leader>i", ":'<,'>sort<CR>")
+
+-- very magic search by default
+vim.cmd [[nnoremap / /\v\c]]
+vim.cmd [[cnoremap %s/ %s/\v\c]]
+
+-- restart LSP
+vim.keymap.set("n", "<leader>p", ":LspRestart<CR>")
