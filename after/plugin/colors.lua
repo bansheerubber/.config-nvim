@@ -22,6 +22,7 @@ require('catppuccin').setup({
     return {
       ["@parameter"] = { fg = colors.maroon },
       ["@parameter.reference"] = { fg = colors.maroon },
+      ["@tag.attribute.tsx"] = { fg = colors.mauve },
       CmpDocNormal = {
         fg = colors.subtext1,
         bg = '#322238',
