@@ -2,6 +2,10 @@ local lsp = require('lsp-zero')
 local cmp = require('cmp')
 local lsp_signature = require('lsp_signature')
 
+require('lspconfig').gdscript.setup({
+	port = 6008
+})
+
 lsp_signature.setup({
 	doc_lines = 0, -- TODO add keybind that toggles docs
 	handler_opts = {
