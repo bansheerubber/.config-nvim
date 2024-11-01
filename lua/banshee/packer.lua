@@ -10,6 +10,10 @@ return require('packer').startup(function(use)
 		requires = { { 'nvim-lua/plenary.nvim' } }
 	})
 
+	use('luukvbaal/statuscol.nvim')
+
+	use({ 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' })
+
 	use({
 		'nvim-telescope/telescope-file-browser.nvim',
 		requires = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
@@ -81,7 +85,7 @@ return require('packer').startup(function(use)
 				panel = { enabled = false },
 			})
 		end,
-	})]]--
+	})]] --
 
 	use({
 		'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
@@ -110,9 +114,9 @@ return require('packer').startup(function(use)
 				hashfile = vim.fn.stdpath('data') .. '/config-local',
 
 				autocommands_create = true, -- Create autocommands (VimEnter, DirectoryChanged)
-				commands_create = true,   -- Create commands (ConfigLocalSource, ConfigLocalEdit, ConfigLocalTrust, ConfigLocalIgnore)
-				silent = false,           -- Disable plugin messages (Config loaded/ignored)
-				lookup_parents = false,   -- Lookup config files in parent directories
+				commands_create = true, -- Create commands (ConfigLocalSource, ConfigLocalEdit, ConfigLocalTrust, ConfigLocalIgnore)
+				silent = false, -- Disable plugin messages (Config loaded/ignored)
+				lookup_parents = false, -- Lookup config files in parent directories
 			})
 		end
 	})

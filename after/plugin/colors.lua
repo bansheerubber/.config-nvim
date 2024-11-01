@@ -23,6 +23,11 @@ require('catppuccin').setup({
       ["@parameter"] = { fg = colors.maroon },
       ["@parameter.reference"] = { fg = colors.maroon },
       ["@tag.attribute.tsx"] = { fg = colors.mauve },
+      UfoFoldedEllipsis = { bg = colors.mauve },
+      FoldedLineNr = {
+        fg = colors.crust,
+        bg = colors.mauve,
+      },
       CmpDocNormal = {
         fg = colors.subtext1,
         bg = '#322238',
@@ -67,23 +72,23 @@ require('catppuccin').setup({
         fg = colors.text,
         bg = colors.mantle,
       },
-   }
+    }
   end,
   color_overrides = {
     mocha = {
-      text     = "#FFDDF3",
-      subtext1 = "#E2C5D8",
-      subtext0 = "#c2a3b7",
-      overlay2 = "#a57ab8",
-      overlay1 = "#9469a5",
-      overlay0 = "#7f568f",
-      surface2 = "#6A4A77",
-      surface1 = "#583C63",
-      surface0 = "#4A3453",
+      text      = "#FFDDF3",
+      subtext1  = "#E2C5D8",
+      subtext0  = "#c2a3b7",
+      overlay2  = "#a57ab8",
+      overlay1  = "#9469a5",
+      overlay0  = "#7f568f",
+      surface2  = "#6A4A77",
+      surface1  = "#583C63",
+      surface0  = "#4A3453",
 
-      base   = "#583C63",
-      mantle = "#38263F",
-      crust  = "#2C1E31",
+      base      = "#583C63",
+      mantle    = "#38263F",
+      crust     = "#2C1E31",
 
       rosewater = "#f5e0dc",
       flamingo  = "#f2cdcd",
