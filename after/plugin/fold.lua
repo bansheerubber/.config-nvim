@@ -1,5 +1,6 @@
 vim.o.foldcolumn = '1' -- '0' is not bad
 vim.o.foldenable = true
+vim.o.foldlevelstart = 99
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.foldingRange = {
