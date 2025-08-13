@@ -8,6 +8,9 @@ conform.setup({
     typescript = { "prettier" },
     typescriptreact = { "prettier" },
   },
+  default_format_opts = {
+    lsp_format = "fallback",
+  },
   lsp_fallback = true,
 })
 
