@@ -26,25 +26,105 @@ lsp.set_sign_icons({
 
 VirtualLines = true
 
+function jump_to_diag(diagnostic, line)
+	vim.api.nvim_win_set_cursor(0, { diagnostic.lnum + 1, 0 })
+
+	vim.schedule(function()
+		vim.diagnostic.open_float({
+			scope = "line",
+			pos = diagnostic.lnum,
+		})
+	end)
+end
+
+function diag_handler(reverse)
+	local current_line = vim.fn.getpos(".")[2]
+	local current_buf = vim.api.nvim_get_current_buf()
+
+	local diag_window = -1
+	local windows = vim.api.nvim_list_wins()
+	for i = 1, #windows do
+		local buffer = vim.api.nvim_win_get_buf(windows[i])
+		local buffer_contents = vim.api.nvim_buf_get_lines(buffer, 0, 1, false)[1]
+		if buffer_contents == "Diagnostics:" then
+			diag_window = windows[i]
+		end
+	end
+
+	if diag_window == -1 and not vim.diagnostic.open_float() then
+		local next = vim.diagnostic.get_next()
+		if next == nil then
+			return
+		end
+
+		local prev = vim.diagnostic.get_prev()
+		if prev == nil then
+			return
+		end
+
+		if next.bufnr ~= current_buf and prev.bufnr ~= current_buf then
+			return
+		end
+
+		local next_dist = math.abs(next.lnum + 1 - current_line)
+		local prev_dist = math.abs(prev.lnum + 1 - current_line)
+
+		if prev_dist < next_dist then
+			jump_to_diag(prev)
+		else
+			jump_to_diag(next)
+		end
+	elseif diag_window ~= -1 then
+		vim.api.nvim_win_close(diag_window, true)
+
+		local diagnostics = vim.diagnostic.get(current_buf)
+
+		if reverse then
+			for i = #diagnostics, 1, -1 do
+				local diagnostic = diagnostics[i]
+				if diagnostic.lnum + 1 < current_line then
+					jump_to_diag(diagnostic)
+					return
+				end
+			end
+
+			if #diagnostics > 0 then
+				local diagnostic = diagnostics[#diagnostics]
+				jump_to_diag(diagnostic)
+			end
+		else
+			for i = 1, #diagnostics do
+				local diagnostic = diagnostics[i]
+				if diagnostic.lnum + 1 > current_line then
+					jump_to_diag(diagnostic)
+					return
+				end
+			end
+
+			if #diagnostics > 0 then
+				local diagnostic = diagnostics[1]
+				jump_to_diag(diagnostic)
+			end
+		end
+	end
+end
+
+vim.keymap.set(
+	"",
+	"<leader>;",
+	function()
+		diag_handler(true)
+	end,
+	{ desc = "Show diag error window (reverse)" }
+)
+
 vim.keymap.set(
 	"",
 	"<leader>l",
 	function()
-		if VirtualLines then
-			vim.diagnostic.config({
-				virtual_lines = {
-					only_current_line = true,
-				},
-			})
-		else
-			vim.diagnostic.config({
-				virtual_lines = false,
-			})
-		end
-
-		VirtualLines = not VirtualLines
+		diag_handler(false)
 	end,
-	{ desc = "Toggle lsp_lines" }
+	{ desc = "Show diag error window" }
 )
 
 function setcmp()
