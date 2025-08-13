@@ -72,6 +72,9 @@ require('catppuccin').setup({
         fg = colors.text,
         bg = colors.mantle,
       },
+      CopilotSuggestion = {
+        fg = colors.overlay0,
+      },
     }
   end,
   color_overrides = {
