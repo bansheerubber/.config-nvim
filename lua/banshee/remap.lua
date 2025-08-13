@@ -85,3 +85,7 @@ vim.cmd [[cnoremap %s/ %s/\v\c]]
 
 -- restart LSP
 vim.keymap.set("n", "<leader>p", ":LspRestart<CR>")
+
+vim.keymap.set('n', '<F1>', '<nop>')
+vim.keymap.set('i', '<F1>', '<nop>')
+vim.keymap.set('v', '<F1>', '<nop>')
