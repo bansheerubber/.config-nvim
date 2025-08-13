@@ -7,6 +7,8 @@ require('lspconfig').gdscript.setup({
 	port = 6008
 })
 
+vim.o.sessionoptions="blank,buffers,curdir,help,tabpages,winsize,winpos,terminal,localoptions"
+
 lsp_signature.setup({
 	doc_lines = 0, -- TODO add keybind that toggles docs
 	handler_opts = {
