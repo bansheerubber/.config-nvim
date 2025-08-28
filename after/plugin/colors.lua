@@ -1,4 +1,5 @@
 -- vim.cmd.colorscheme('bansheescheme')
+local colors = require("color_definitions")
 
 vim.opt.termguicolors = true
 vim.opt.showcmd = false
@@ -75,6 +76,48 @@ require('catppuccin').setup({
       CopilotSuggestion = {
         fg = colors.overlay0,
       },
+      FlashLabel = {
+        fg = colors.mantle,
+        bg = colors.mauve,
+      },
+      FlashMatch = {
+        fg = colors.peach,
+      },
+      FlashCurrent = {
+        fg = colors.green,
+      },
+      FlashTreesitterLabel1 = {
+        fg = colors.mantle,
+        bg = colors.pink,
+      },
+      FlashTreesitterLabel2 = {
+        fg = colors.mantle,
+        bg = colors.red,
+      },
+      FlashTreesitterLabel3 = {
+        fg = colors.mantle,
+        bg = colors.maroon,
+      },
+      FlashTreesitterLabel4 = {
+        fg = colors.mantle,
+        bg = colors.yellow,
+      },
+      FlashTreesitterLabel5 = {
+        fg = colors.mantle,
+        bg = colors.green,
+      },
+      FlashTreesitterLabel6 = {
+        fg = colors.mantle,
+        bg = colors.sky,
+      },
+      FlashTreesitterLabel7 = {
+        fg = colors.mantle,
+        bg = colors.blue,
+      },
+      FlashTreesitterLabel8 = {
+        fg = colors.mantle,
+        bg = colors.lavender,
+      },
     }
   end,
   color_overrides = {
@@ -93,20 +136,20 @@ require('catppuccin').setup({
       mantle    = "#38263F",
       crust     = "#2C1E31",
 
-      rosewater = "#f5e0dc",
-      flamingo  = "#f2cdcd",
-      pink      = "#D796F2",
-      mauve     = "#CF84EF",
-      red       = "#f38ba8",
-      maroon    = "#eba0ac",
-      peach     = "#fab387",
-      yellow    = "#f9e2af",
-      green     = "#a6e3a1",
-      teal      = "#94e2d5",
-      sky       = "#89dceb",
-      sapphire  = "#74c7ec",
-      blue      = "#89b4fa",
-      lavender  = "#b4befe",
+      rosewater = colors.rosewater,
+      flamingo  = colors.flamingo,
+      pink      = colors.pink,
+      mauve     = colors.mauve,
+      red       = colors.red,
+      maroon    = colors.maroon,
+      peach     = colors.peach,
+      yellow    = colors.yellow,
+      green     = colors.green,
+      teal      = colors.teal,
+      sky       = colors.sky,
+      sapphire  = colors.sapphire,
+      blue      = colors.blue,
+      lavender  = colors.lavender,
     },
   },
 })
