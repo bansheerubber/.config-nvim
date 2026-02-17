@@ -89,3 +89,28 @@ vim.keymap.set("n", "<leader>P", ":LspRestart<CR>")
 vim.keymap.set('n', '<F1>', '<nop>')
 vim.keymap.set('i', '<F1>', '<nop>')
 vim.keymap.set('v', '<F1>', '<nop>')
+
+local function ltrim(s)
+	return s:gsub("^%s+", "")
+end
+
+local function sensible_home()
+	local line = vim.api.nvim_get_current_line()
+	local trimmed = ltrim(line)
+
+	local difference = #line - #trimmed
+
+	local line_col_pair = vim.api.nvim_win_get_cursor(0)
+	local line_no = line_col_pair[1]
+	local col = line_col_pair[2]
+
+	if difference == col then
+		vim.api.nvim_win_set_cursor(0, { line_no, 0 })
+	else
+		vim.api.nvim_win_set_cursor(0, { line_no, difference })
+	end
+end
+
+-- make home key behave sensibly
+vim.keymap.set('n', '<Home>', sensible_home, { desc = 'Sensible home' })
+vim.keymap.set('i', '<Home>', sensible_home, { desc = 'Sensible home' })
