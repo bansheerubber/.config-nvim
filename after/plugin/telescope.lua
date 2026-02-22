@@ -31,19 +31,33 @@ require('telescope').setup({
 -- 	end
 -- )
 
+local function aspect_ratio()
+	local width = tonumber(vim.api.nvim_command_output("echo &columns")) or 0
+	local height = (tonumber(vim.api.nvim_command_output("echo &lines")) or 0) * 2
+	return width / height
+end
+
+local vertical_layout = {
+	height = 0.9,
+	mirror = true,
+	prompt_position = 'top',
+	preview_height = 0.75,
+}
+
+local horizontal_layout = {
+	height = 0.9,
+	prompt_position = 'top',
+	preview_width = 0.6,
+}
+
 vim.keymap.set('n', '<leader>f', function()
 	-- '<Cmd>Telescope file_browser sorting_strategy=ascending path=%:p:h select_buffer=true<CR>')
-	require("telescope").extensions.file_browser.file_browser({
+	telescope.extensions.file_browser.file_browser({
 		sorting_strategy = 'ascending',
 		path = '%:p:h',
 		select_buffer = true,
-		layout_strategy = 'vertical',
-		layout_config = {
-			height = 0.8,
-			mirror = true,
-			prompt_position = 'top',
-			preview_height = 0.5,
-		},
+		layout_strategy = aspect_ratio() > 1 and 'horizontal' or 'vertical',
+		layout_config = aspect_ratio() > 1 and horizontal_layout or vertical_layout,
 	})
 end)
 
@@ -52,28 +66,24 @@ vim.keymap.set('n', '<leader>a', '<Cmd>Telescope session-lens search_session<CR>
 vim.keymap.set({ 'n', 'v', }, '<leader>t', function()
 	builtin.treesitter({
 		ignore_symbols = { 'var', 'namespace' },
-		layout_strategy = 'vertical',
-		layout_config = {
-			height = 0.8,
-			mirror = true,
-			prompt_position = 'top',
-			preview_height = 0.75,
-		},
+		sorting_strategy = 'ascending',
+		layout_strategy = aspect_ratio() > 1 and 'horizontal' or 'vertical',
+		layout_config = aspect_ratio() > 1 and horizontal_layout or vertical_layout,
 	})
 end)
 
 -- find string in all files
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-F>', function()
-	builtin.live_grep({
-		layout_strategy = 'vertical',
-		layout_config = {
-			height = 0.8,
-			mirror = true,
-			prompt_position = 'top',
-			preview_height = 0.75,
-		},
-	})
-end)
+-- vim.keymap.set({ 'n', 'i', 'v' }, '<C-F>', function()
+-- 	builtin.live_grep({
+-- 		layout_strategy = 'vertical',
+-- 		layout_config = {
+-- 			height = 0.8,
+-- 			mirror = true,
+-- 			prompt_position = 'top',
+-- 			preview_height = 0.75,
+-- 		},
+-- 	})
+-- end)
 
 vim.api.nvim_create_autocmd("User", {
 	pattern = "TelescopePreviewerLoaded",
