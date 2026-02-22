@@ -3,8 +3,8 @@ local cmp = require('cmp')
 local lsp_signature = require('lsp_signature')
 local util = require 'lspconfig.util'
 
-require('lspconfig').gdscript.setup({
-	port = 6008
+vim.lsp.config('gdscript', {
+	port = 6008,
 })
 
 vim.o.sessionoptions="blank,buffers,curdir,help,tabpages,winsize,winpos,terminal,localoptions"

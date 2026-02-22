@@ -62,12 +62,12 @@ require('catppuccin').setup({
         bg = colors.crust,
       },
       TelescopeBorder = {
-        fg = colors.overlay0,
+        fg = colors.mauve,
         bg = '#261A2B',
       },
       TelescopeNormal = {
         fg = colors.text,
-        bg = '#261A2B',
+        -- bg = '#FF0000',
       },
       TelescopeSelection = {
         fg = colors.text,

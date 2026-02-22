@@ -10,6 +10,10 @@ return require('packer').startup(function(use)
 		requires = { { 'nvim-lua/plenary.nvim' } }
 	})
 
+	use("MunifTanjim/nui.nvim")
+
+	use("dmtrKovalenko/fff.nvim")
+
 	use('luukvbaal/statuscol.nvim')
 
 	use({ 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' })
@@ -67,8 +71,6 @@ return require('packer').startup(function(use)
 		}
 	})
 
-	use('github/copilot.vim')
-
 	--[[use({
 		'zbirenbaum/copilot-cmp',
 		after = { 'copilot.lua' },
@@ -87,7 +89,8 @@ return require('packer').startup(function(use)
 				panel = { enabled = false },
 			})
 		end,
-	})]] --
+	})]]
+	--
 
 	use({ '/home/me/Projects/catppuccin.nvim', as = 'catppuccin' })
 
@@ -110,7 +113,7 @@ return require('packer').startup(function(use)
 
 				autocommands_create = true, -- Create autocommands (VimEnter, DirectoryChanged)
 				commands_create = true, -- Create commands (ConfigLocalSource, ConfigLocalEdit, ConfigLocalTrust, ConfigLocalIgnore)
-				silent = false, -- Disable plugin messages (Config loaded/ignored)
+				silent = false,         -- Disable plugin messages (Config loaded/ignored)
 				lookup_parents = false, -- Lookup config files in parent directories
 			})
 		end
