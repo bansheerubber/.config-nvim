@@ -2,7 +2,7 @@ local builtin = require('telescope.builtin')
 local telescope = require('telescope')
 telescope.load_extension('file_browser')
 
-require('telescope').setup({
+telescope.setup({
 	extensions = {
 		file_browser = {
 			dir_icon = ' ',
@@ -11,31 +11,6 @@ require('telescope').setup({
 		},
 	},
 })
-
--- vim.keymap.set(
--- 	{ 'n', 'i', 'v' },
--- 	'<C-p>',
--- 	function()
--- 		builtin.find_files({
--- 			no_ignore = true,
--- 			find_command = {
--- 				'rg',
--- 				'--files',
--- 				'--hidden',
--- 				'-g', '!.git',
--- 				'-g', '!node_modules',
--- 				'-g', '!target',
--- 				'-g', '!dist',
--- 			},
--- 		})
--- 	end
--- )
-
-local function aspect_ratio()
-	local width = tonumber(vim.api.nvim_command_output("echo &columns")) or 0
-	local height = (tonumber(vim.api.nvim_command_output("echo &lines")) or 0) * 2
-	return width / height
-end
 
 local vertical_layout = {
 	height = 0.9,
@@ -50,8 +25,31 @@ local horizontal_layout = {
 	preview_width = 0.6,
 }
 
+local function calc_preview_size()
+	local preview_size = 0.75
+
+	local height = math.floor(vim.o.lines * 0.9)
+	local preview_height = math.floor(height * preview_size)
+	local list_height = height - preview_height - 8
+
+	-- make list have a minimum height of 20 lines
+	if list_height < 20 then
+		local derived_preview_height = height - 20 - 7
+		return derived_preview_height / height
+	end
+
+	return preview_size
+end
+
+local function aspect_ratio()
+	local width = vim.o.columns
+	local height = vim.o.lines * 2
+	return width / height
+end
+
 vim.keymap.set('n', '<leader>f', function()
-	-- '<Cmd>Telescope file_browser sorting_strategy=ascending path=%:p:h select_buffer=true<CR>')
+	vertical_layout.preview_height = calc_preview_size()
+
 	telescope.extensions.file_browser.file_browser({
 		sorting_strategy = 'ascending',
 		path = '%:p:h',
@@ -64,6 +62,8 @@ end)
 vim.keymap.set('n', '<leader>a', '<Cmd>Telescope session-lens search_session<CR>')
 
 vim.keymap.set({ 'n', 'v', }, '<leader>t', function()
+	vertical_layout.preview_height = calc_preview_size()
+
 	builtin.treesitter({
 		ignore_symbols = { 'var', 'namespace' },
 		sorting_strategy = 'ascending',
@@ -71,19 +71,6 @@ vim.keymap.set({ 'n', 'v', }, '<leader>t', function()
 		layout_config = aspect_ratio() > 1 and horizontal_layout or vertical_layout,
 	})
 end)
-
--- find string in all files
--- vim.keymap.set({ 'n', 'i', 'v' }, '<C-F>', function()
--- 	builtin.live_grep({
--- 		layout_strategy = 'vertical',
--- 		layout_config = {
--- 			height = 0.8,
--- 			mirror = true,
--- 			prompt_position = 'top',
--- 			preview_height = 0.75,
--- 		},
--- 	})
--- end)
 
 vim.api.nvim_create_autocmd("User", {
 	pattern = "TelescopePreviewerLoaded",
