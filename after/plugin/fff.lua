@@ -1,36 +1,5 @@
 local fff = require('fff')
 
-fff.setup({
-	layout = {
-		prompt_position = 'top',
-		preview_position = 'bottom',
-		preview_size = 0.75,
-		flex = false,
-	},
-	preview = {
-		line_numbers = true,
-	},
-	grep = {
-		modes = { 'plain', 'fuzzy', 'regex', },
-	},
-})
-
-local vertical_layout = {
-	prompt_position = 'top',
-	preview_position = 'bottom',
-	preview_size = 0.75,
-	height = 0.9,
-	flex = false,
-}
-
-local horizontal_layout = {
-	prompt_position = 'top',
-	preview_position = 'right',
-	preview_size = 0.6,
-	height = 0.9,
-	flex = false,
-}
-
 local function calc_preview_size()
 	local preview_size = 0.75
 
@@ -53,28 +22,35 @@ local function aspect_ratio()
 	return width / height
 end
 
+fff.setup({
+	layout = {
+		prompt_position = 'top',
+		preview_position = function()
+			return aspect_ratio() > 1 and 'right' or 'bottom'
+		end,
+		preview_size = function()
+			return aspect_ratio() > 1 and 0.6 or calc_preview_size()
+		end,
+		flex = false,
+	},
+	preview = {
+		line_numbers = true,
+	},
+	grep = {
+		modes = { 'plain', 'fuzzy', 'regex', },
+	},
+})
+
 vim.keymap.set(
 	{ 'n', 'i', 'v' },
 	'<C-p>',
-	function()
-		vertical_layout.preview_size = calc_preview_size()
-
-		fff.find_files({
-			layout = aspect_ratio() > 1 and horizontal_layout or vertical_layout,
-		})
-	end,
+	fff.find_files,
 	{ desc = 'FFFind files' }
 )
 
 vim.keymap.set(
 	{ 'n', 'i', 'v' },
 	'<C-f>',
-	function()
-		vertical_layout.preview_size = calc_preview_size()
-
-		fff.live_grep({
-			layout = aspect_ratio() > 1 and horizontal_layout or vertical_layout,
-		})
-	end,
+	fff.live_grep,
 	{ desc = 'FFFind grep' }
 )
