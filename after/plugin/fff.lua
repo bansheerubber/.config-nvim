@@ -9,7 +9,9 @@ fff.setup({
 	},
 	preview = {
 		line_numbers = true,
-		highlight_line = 'screenline',
+	},
+	grep = {
+		modes = { 'plain', 'fuzzy', 'regex', },
 	},
 })
 

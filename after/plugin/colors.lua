@@ -1,4 +1,3 @@
--- vim.cmd.colorscheme('bansheescheme')
 local colors = require("color_definitions")
 
 vim.opt.termguicolors = true
