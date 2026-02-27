@@ -7,7 +7,7 @@ vim.lsp.config('gdscript', {
 	port = 6008,
 })
 
-vim.o.sessionoptions="blank,buffers,curdir,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.o.sessionoptions = "blank,buffers,curdir,help,tabpages,winsize,winpos,terminal,localoptions"
 
 lsp_signature.setup({
 	doc_lines = 0, -- TODO add keybind that toggles docs
@@ -245,14 +245,14 @@ require('luasnip.loaders.from_vscode').lazy_load()
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {},
-  handlers = {
-    lsp.default_setup,
-    lua_ls = function()
-      local lua_opts = lsp.nvim_lua_ls()
-      require('lspconfig').lua_ls.setup(lua_opts)
-    end,
-  }
+	ensure_installed = {},
+	handlers = {
+		lsp.default_setup,
+		lua_ls = function()
+			local lua_opts = lsp.nvim_lua_ls()
+			require('lspconfig').lua_ls.setup(lua_opts)
+		end,
+	}
 })
 
 vim.keymap.set({ "n", "v", "i", }, "<M-l>", function() vim.cmd([[ LspRestart ]]) end, {})
@@ -269,33 +269,33 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'BufRead', }, {
 ---@param mode "v"|"V"
 ---@return table {start={row,col}, end={row,col}} using (1, 0) indexing
 local function range_from_selection(bufnr, mode)
-  -- TODO: Use `vim.fn.getregionpos()` instead.
+	-- TODO: Use `vim.fn.getregionpos()` instead.
 
-  -- [bufnum, lnum, col, off]; both row and column 1-indexed
-  local start = vim.fn.getpos('v')
-  local end_ = vim.fn.getpos('.')
-  local start_row = start[2]
-  local start_col = start[3]
-  local end_row = end_[2]
-  local end_col = end_[3]
+	-- [bufnum, lnum, col, off]; both row and column 1-indexed
+	local start = vim.fn.getpos('v')
+	local end_ = vim.fn.getpos('.')
+	local start_row = start[2]
+	local start_col = start[3]
+	local end_row = end_[2]
+	local end_col = end_[3]
 
-  -- A user can start visual selection at the end and move backwards
-  -- Normalize the range to start < end
-  if start_row == end_row and end_col < start_col then
-    end_col, start_col = start_col, end_col --- @type integer, integer
-  elseif end_row < start_row then
-    start_row, end_row = end_row, start_row --- @type integer, integer
-    start_col, end_col = end_col, start_col --- @type integer, integer
-  end
-  if mode == 'V' then
-    start_col = 1
-    local lines = vim.api.nvim_buf_get_lines(bufnr, end_row - 1, end_row, true)
-    end_col = #lines[1]
-  end
-  return {
-    ['start'] = { start_row, start_col - 1 },
-    ['end'] = { end_row, end_col - 1 },
-  }
+	-- A user can start visual selection at the end and move backwards
+	-- Normalize the range to start < end
+	if start_row == end_row and end_col < start_col then
+		end_col, start_col = start_col, end_col --- @type integer, integer
+	elseif end_row < start_row then
+		start_row, end_row = end_row, start_row --- @type integer, integer
+		start_col, end_col = end_col, start_col --- @type integer, integer
+	end
+	if mode == 'V' then
+		start_col = 1
+		local lines = vim.api.nvim_buf_get_lines(bufnr, end_row - 1, end_row, true)
+		end_col = #lines[1]
+	end
+	return {
+		['start'] = { start_row, start_col - 1 },
+		['end'] = { end_row, end_col - 1 },
+	}
 end
 
 local function ts_format(ts_client, bufnr)
@@ -307,7 +307,7 @@ local function ts_format(ts_client, bufnr)
 	if mode == 'v' or mode == 'V' then
 		local range = range_from_selection(bufnr, mode)
 		params =
-			vim.lsp.util.make_given_range_params(range.start, range['end'], bufnr, ts_client.offset_encoding)
+				vim.lsp.util.make_given_range_params(range.start, range['end'], bufnr, ts_client.offset_encoding)
 	else
 		params = vim.lsp.util.make_range_params(win, ts_client.offset_encoding)
 	end

@@ -4,25 +4,29 @@ fff.setup({
 	layout = {
 		prompt_position = 'top',
 		preview_position = 'bottom',
-		preview_size = '0.75',
+		preview_size = 0.75,
+		flex = false,
 	},
 	preview = {
 		line_numbers = true,
+		highlight_line = 'screenline',
 	},
 })
 
 local vertical_layout = {
 	prompt_position = 'top',
 	preview_position = 'bottom',
-	preview_size = '0.75',
-	height = '0.9',
+	preview_size = 0.75,
+	height = 0.9,
+	flex = false,
 }
 
 local horizontal_layout = {
 	prompt_position = 'top',
 	preview_position = 'right',
-	preview_size = '0.6',
-	height = '0.9',
+	preview_size = 0.6,
+	height = 0.9,
+	flex = false,
 }
 
 local function calc_preview_size()
