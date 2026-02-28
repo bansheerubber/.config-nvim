@@ -1,7 +1,8 @@
-require("banshee.packer")
 require("banshee.remap")
 require("banshee.tabs")
 require("banshee.highlight")
+require("banshee.lazy")
+require("banshee.lsp")
 
 require("os")
 
