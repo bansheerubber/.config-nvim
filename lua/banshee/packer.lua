@@ -12,7 +12,7 @@ return require('packer').startup(function(use)
 
 	use("MunifTanjim/nui.nvim")
 
-	use("/home/me/Projects/fff.nvim")
+	use('dmtrKovalenko/fff.nvim')
 
 	use('luukvbaal/statuscol.nvim')
 
