@@ -2,7 +2,7 @@ local util = require("lspconfig.util")
 local setup_cmp = require("banshee.cmp")
 local ts_format = require("banshee.tsformat")
 
-vim.lsp.config('gdscript', {
+vim.lsp.config("gdscript", {
 	port = 6008,
 })
 
@@ -102,23 +102,13 @@ function diag_handler(reverse)
 	end
 end
 
-vim.keymap.set(
-	"",
-	"<leader>;",
-	function()
-		diag_handler(true)
-	end,
-	{ desc = "Show diag error window (reverse)" }
-)
+vim.keymap.set("", "<leader>;", function()
+	diag_handler(true)
+end, { desc = "Show diag error window (reverse)" })
 
-vim.keymap.set(
-	"",
-	"<leader>l",
-	function()
-		diag_handler(false)
-	end,
-	{ desc = "Show diag error window" }
-)
+vim.keymap.set("", "<leader>l", function()
+	diag_handler(false)
+end, { desc = "Show diag error window" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)

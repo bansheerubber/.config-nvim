@@ -6,7 +6,6 @@ return {
 			library = {
 				"~/Projects/fff.nvim",
 			},
-			lua_root = false,
 		},
 	},
 }

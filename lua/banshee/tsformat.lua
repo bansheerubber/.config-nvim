@@ -5,8 +5,8 @@ local function range_from_selection(bufnr, mode)
 	-- TODO: Use `vim.fn.getregionpos()` instead.
 
 	-- [bufnum, lnum, col, off]; both row and column 1-indexed
-	local start = vim.fn.getpos('v')
-	local end_ = vim.fn.getpos('.')
+	local start = vim.fn.getpos("v")
+	local end_ = vim.fn.getpos(".")
 	local start_row = start[2]
 	local start_col = start[3]
 	local end_row = end_[2]
@@ -20,14 +20,14 @@ local function range_from_selection(bufnr, mode)
 		start_row, end_row = end_row, start_row --- @type integer, integer
 		start_col, end_col = end_col, start_col --- @type integer, integer
 	end
-	if mode == 'V' then
+	if mode == "V" then
 		start_col = 1
 		local lines = vim.api.nvim_buf_get_lines(bufnr, end_row - 1, end_row, true)
 		end_col = #lines[1]
 	end
 	return {
-		['start'] = { start_row, start_col - 1 },
-		['end'] = { end_row, end_col - 1 },
+		["start"] = { start_row, start_col - 1 },
+		["end"] = { end_row, end_col - 1 },
 	}
 end
 
@@ -37,10 +37,9 @@ local function ts_format(ts_client, bufnr)
 
 	local mode = vim.api.nvim_get_mode().mode
 	local win = vim.api.nvim_get_current_win()
-	if mode == 'v' or mode == 'V' then
+	if mode == "v" or mode == "V" then
 		local range = range_from_selection(bufnr, mode)
-		params =
-				vim.lsp.util.make_given_range_params(range.start, range['end'], bufnr, ts_client.offset_encoding)
+		params = vim.lsp.util.make_given_range_params(range.start, range["end"], bufnr, ts_client.offset_encoding)
 	else
 		params = vim.lsp.util.make_range_params(win, ts_client.offset_encoding)
 	end
@@ -60,7 +59,7 @@ local function ts_format(ts_client, bufnr)
 	vim.list_extend(diagnostics, vim.diagnostic.get(bufnr, { namespace = ns_pull, lnum = lnum }))
 	vim.list_extend(diagnostics, vim.diagnostic.get(bufnr, { namespace = ns_push, lnum = lnum }))
 
-	params.context = vim.tbl_extend('force', context, {
+	params.context = vim.tbl_extend("force", context, {
 		---@diagnostic disable-next-line: no-unknown
 		diagnostics = vim.tbl_map(function(d)
 			return d.user_data.lsp
@@ -68,7 +67,7 @@ local function ts_format(ts_client, bufnr)
 	})
 
 	ts_client:request(
-		'textDocument/codeAction',
+		"textDocument/codeAction",
 		params,
 		---@param result (lsp.Command|lsp.CodeAction)[]|nil
 		function(err, result, ctx)
@@ -82,7 +81,7 @@ local function ts_format(ts_client, bufnr)
 				end
 				local a_cmd = action.command
 				if a_cmd then
-					local command = type(a_cmd) == 'table' and a_cmd or action
+					local command = type(a_cmd) == "table" and a_cmd or action
 					--- @cast command lsp.Command
 					ts_client:exec_cmd(command, ctx)
 				end
@@ -100,4 +99,3 @@ local function ts_format(ts_client, bufnr)
 end
 
 return ts_format
-

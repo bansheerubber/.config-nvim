@@ -1,9 +1,9 @@
 function settabs()
-	vim.bo.autoindent  = true
-	vim.bo.tabstop     = 2
-	vim.bo.shiftwidth  = 2
+	vim.bo.autoindent = true
+	vim.bo.tabstop = 2
+	vim.bo.shiftwidth = 2
 	vim.bo.softtabstop = 2
-	vim.bo.expandtab   = false
+	vim.bo.expandtab = false
 
 	print("set tabs to sane options")
 end
@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'BufRead', }, {
 	callback = function()
 		settabs()
 	end
-})]]--
+})]]
+--
 
 vim.keymap.set("n", "<leader>q", settabs)
