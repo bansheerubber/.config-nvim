@@ -92,6 +92,14 @@ function setup_cmp()
 
 				item.kind = kinds[item.kind]
 				item.menu = menu_icon[entry.source.name]
+
+				local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
+
+				if color_item.abbr_hl_group then
+					item.kind_hl_group = color_item.abbr_hl_group
+					item.kind = color_item.abbr
+				end
+
 				return item
 			end,
 		},

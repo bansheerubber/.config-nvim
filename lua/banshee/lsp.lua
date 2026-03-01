@@ -182,5 +182,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end, opts)
 
 		setup_cmp()
+
+		vim.opt.signcolumn = "yes"
 	end,
 })
