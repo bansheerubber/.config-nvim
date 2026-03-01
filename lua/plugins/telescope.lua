@@ -4,17 +4,28 @@ return {
 	config = function()
 		local builtin = require("telescope.builtin")
 		local telescope = require("telescope")
-		telescope.load_extension("file_browser")
 
-		telescope.setup({
+		require("telescope").setup({
+			defaults = {
+				prompt_prefix = "  ",
+				selection_caret = "  ",
+			},
 			extensions = {
 				file_browser = {
-					dir_icon = " ",
+					dir_icon = "",
+					dir_icon_hl = "Directory",
+					git_icons = {
+						untracked = "",
+						changed = "",
+					},
+					display_stat = {},
 					grouped = true,
 					hidden = { file_browser = true, folder_browser = true },
 				},
 			},
 		})
+
+		telescope.load_extension("file_browser")
 
 		local vertical_layout = {
 			height = 0.9,

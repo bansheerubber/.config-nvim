@@ -26,6 +26,7 @@ return {
 		require("fff.download").download_or_build_binary()
 	end,
 	opts = {
+		prompt = "  ",
 		layout = {
 			prompt_position = "top",
 			preview_position = function(terminal_width, terminal_height)
@@ -41,6 +42,10 @@ return {
 		},
 		grep = {
 			modes = { "plain", "fuzzy", "regex" },
+		},
+		hl = {
+			border = "FFFFloatBorder",
+			title = "FFFTitle",
 		},
 	},
 	lazy = false,

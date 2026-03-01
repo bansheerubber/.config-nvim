@@ -16,3 +16,5 @@ vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 500
+
+vim.o.winborder = 'rounded'

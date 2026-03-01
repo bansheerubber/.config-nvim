@@ -21,6 +21,19 @@ return {
 					DiffChange = { bg = "#29364b" },
 					DiffDelete = { bg = "#482932" },
 					DiffText = { bg = "#402d48" },
+					Directory = { fg = colors.mauve },
+
+					TelescopeResultsDiffAdd = { fg = colors.green },
+					TelescopeResultsDiffChange = { fg = colors.yellow },
+					TelescopeResultsDiffDelete = { fg = colors.red },
+					TelescopeResultsDiffText = { fg = colors.pink },
+					TelescopeResultsDiffUntracked = { fg = colors.green },
+
+					FFFGitSignStaged = { fg = colors.green },
+					FFFGitSignModified = { fg = colors.yellow },
+					FFFGitSignDeleted = { fg = colors.red },
+					FFFGitSignUntracked = { fg = colors.green },
+
 					["@parameter"] = { fg = colors.maroon },
 					["@parameter.reference"] = { fg = colors.maroon },
 					["@tag.attribute.tsx"] = { fg = colors.mauve },
@@ -63,7 +76,6 @@ return {
 					},
 					TelescopeBorder = {
 						fg = colors.mauve,
-						bg = "#261A2B",
 					},
 					TelescopeNormal = {
 						fg = colors.text,
@@ -116,6 +128,12 @@ return {
 					FlashTreesitterLabel8 = {
 						fg = colors.mantle,
 						bg = colors.lavender,
+					},
+					FFFFloatBorder = {
+						fg = colors.mauve,
+					},
+					FFFTitle = {
+						fg = colors.mauve,
 					},
 				}
 			end,
