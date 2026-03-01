@@ -20,6 +20,7 @@
   "mason.nvim": { "branch": "main", "commit": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65" },
   "multicursor.nvim": { "branch": "1.0", "commit": "811681faf44d8031685614cc00a148cd3ece697c" },
   "nui.nvim": { "branch": "main", "commit": "de740991c12411b663994b2860f1a4fd0937c130" },
+  "nvim": { "branch": "main", "commit": "0a5de4da015a175f416d6ef1eda84661623e0500" },
   "nvim-cmp": { "branch": "main", "commit": "da88697d7f45d16852c6b2769dc52387d1ddc45f" },
   "nvim-config-local": { "branch": "main", "commit": "990f3e35e0fba8fb83012d7e85f9a6a77de7f87f" },
   "nvim-highlight-colors": { "branch": "main", "commit": "e2cb22089cc2358b2b995c09578224f142de6039" },

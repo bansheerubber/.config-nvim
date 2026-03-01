@@ -1,6 +1,5 @@
 return {
-	dir = "~/Projects/catppuccin.nvim",
-	name = "catppuccin",
+	"catppuccin/nvim",
 	lazy = false,
 	priority = 10000,
 	config = function()
@@ -14,16 +13,10 @@ return {
 			integrations = {
 				treesitter = true,
 			},
-			highlight_overrides = {
-				all = function(colors)
-					return {
-						LineNr = { fg = colors.overlay1 },
-						CursorLineNr = { fg = colors.mauve },
-					}
-				end,
-			},
 			custom_highlights = function(colors)
 				return {
+					LineNr = { fg = colors.surface2 },
+					CursorLineNr = { fg = colors.mauve },
 					DiffAdd = { bg = "#314430" },
 					DiffChange = { bg = "#29364b" },
 					DiffDelete = { bg = "#482932" },
