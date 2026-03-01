@@ -1,6 +1,8 @@
 return {
 	dir = "~/Projects/catppuccin.nvim",
 	name = "catppuccin",
+	lazy = false,
+	priority = 10000,
 	config = function()
 		local colors = require("banshee.color_definitions")
 
@@ -22,6 +24,10 @@ return {
 			},
 			custom_highlights = function(colors)
 				return {
+					DiffAdd = { bg = "#314430" },
+					DiffChange = { bg = "#29364b" },
+					DiffDelete = { bg = "#482932" },
+					DiffText = { bg = "#402d48" },
 					["@parameter"] = { fg = colors.maroon },
 					["@parameter.reference"] = { fg = colors.maroon },
 					["@tag.attribute.tsx"] = { fg = colors.mauve },
@@ -68,7 +74,6 @@ return {
 					},
 					TelescopeNormal = {
 						fg = colors.text,
-						-- bg = '#FF0000',
 					},
 					TelescopeSelection = {
 						fg = colors.text,
