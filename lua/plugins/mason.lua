@@ -4,9 +4,19 @@ return {
 	config = function()
 		require("mason").setup()
 		require("mason-lspconfig").setup({
-			ensure_installed = {},
+			ensure_installed = {
+				"css_variables",
+				"eslint",
+				"gopls",
+				"lua_ls",
+				"omnisharp",
+				"pyright",
+				"rust_analyzer",
+				"sqlls",
+				"tailwindcss",
+				"ts_ls",
+			},
 			handlers = {
-				-- lsp.default_setup,
 				lua_ls = function()
 					local lua_opts = lsp.nvim_lua_ls()
 					require("lspconfig").lua_ls.setup(lua_opts)

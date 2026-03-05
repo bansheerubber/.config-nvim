@@ -42,7 +42,7 @@ local function decorate_config(config)
 		layout_strategy = aspect_ratio() > 1 and "horizontal" or "vertical",
 		layout_config = aspect_ratio() > 1 and horizontal_layout or vertical_layout,
 		entry_maker = config.group_by and function(entry)
-			local line_col = string.format("%d:%d", tostring(entry.lnum), tostring(entry.col))
+			local line_col = string.format(" %d:%d", tostring(entry.lnum), tostring(entry.col))
 			local text = entry.text
 
 			return {

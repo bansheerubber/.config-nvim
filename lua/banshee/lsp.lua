@@ -6,6 +6,10 @@ vim.lsp.config("gdscript", {
 	port = 6008,
 })
 
+vim.lsp.config("css_variables", {
+	filetypes = { "css", "scss", "less", "typescriptreact", "typescript" },
+})
+
 vim.o.sessionoptions = "blank,buffers,curdir,help,tabpages,winsize,winpos,terminal,localoptions"
 
 vim.diagnostic.config({
