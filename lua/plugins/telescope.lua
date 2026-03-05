@@ -75,7 +75,9 @@ local function decorate_config(config)
 			field = "filename",
 			header_renderer = function(_, path)
 				local tail = utils.path_tail(path)
-				local directory = path:gsub("/" .. tail, ""):gsub(vim.fn.getcwd() .. "/", "")
+
+				local directory = path:sub(0, path:find(tail, 0, true) - 2)
+				directory = directory:sub(#vim.fn.getcwd() + 2, #directory)
 
 				return {
 					{ string.format("  %s ", tail), "Normal" },
@@ -127,7 +129,7 @@ return {
 		vim.keymap.set("n", "<leader>a", "<Cmd>Telescope session-lens search_session<CR>")
 
 		vim.keymap.set({ "n", "v" }, "<leader>t", function()
-			builtin.treesitter(decorate_config({
+			builtin.lsp_document_symbols(decorate_config({
 				ignore_symbols = { "var", "namespace" },
 				sorting_strategy = "ascending",
 			}))
@@ -135,6 +137,14 @@ return {
 
 		vim.keymap.set("n", "<leader>r", function()
 			builtin.lsp_references(decorate_config({
+				path_display = { "hidden" },
+				sorting_strategy = "ascending",
+				group_by = true,
+			}))
+		end)
+
+		vim.keymap.set("n", "gd", function()
+			builtin.lsp_definitions(decorate_config({
 				path_display = { "hidden" },
 				sorting_strategy = "ascending",
 				group_by = true,

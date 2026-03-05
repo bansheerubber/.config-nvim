@@ -129,10 +129,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- SEE TELESCOPE FOR MORE LSP KEYMAPS
 
-		vim.keymap.set("n", "gd", function()
-			vim.lsp.buf.definition({ reuse_win = true })
-		end, opts)
-
 		vim.keymap.set("n", "K", function()
 			vim.lsp.buf.hover()
 		end, opts)
