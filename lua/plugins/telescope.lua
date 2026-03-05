@@ -33,48 +33,53 @@ local function aspect_ratio()
 	return width / height
 end
 
-local function path_display(opts, path)
-	local tail = require("telescope.utils").path_tail(path)
-	local directory = path:gsub("/" .. tail, "")
-	path = string.format("%s %s", tail, directory)
-
-	local highlights = {
-		{
-			{
-				0,
-				#tail,
-			},
-			"Normal",
-		},
-		{
-			{
-				#tail + 1,
-				#path,
-			},
-			"FFFDirectory",
-		},
-	}
-
-	return path, highlights
-end
-
 local function decorate_config(config)
 	vertical_layout.preview_height = calc_preview_size()
 
 	local utils = require("telescope.utils")
 
-	return vim.tbl_deep_extend('force', config, {
+	return vim.tbl_deep_extend("force", config, {
 		layout_strategy = aspect_ratio() > 1 and "horizontal" or "vertical",
 		layout_config = aspect_ratio() > 1 and horizontal_layout or vertical_layout,
+		entry_maker = config.group_by and function(entry)
+			local line_col = string.format("%d:%d", tostring(entry.lnum), tostring(entry.col))
+			local text = entry.text
+
+			return {
+				value = entry,
+				ordinal = " " .. entry.text,
+				display = function()
+					return string.format("%s %s", line_col, text),
+						{
+							{
+								{ 0, #line_col },
+								"LineNr",
+							},
+							{
+								{ #line_col + 1, (#line_col + #text + 1) },
+								"Normal",
+							},
+						}
+				end,
+
+				bufnr = entry.bufnr,
+				filename = entry.filename,
+				lnum = entry.lnum,
+				col = entry.col,
+				text = entry.text,
+				start = entry.start,
+				finish = entry.finish,
+			}
+		end,
 		group_by = config.group_by and {
 			field = "filename",
-			header_renderer = function(opts, path)
+			header_renderer = function(_, path)
 				local tail = utils.path_tail(path)
 				local directory = path:gsub("/" .. tail, ""):gsub(vim.fn.getcwd() .. "/", "")
 
 				return {
 					{ string.format("  %s ", tail), "Normal" },
-					{ directory,                   "FFFDirectory" },
+					{ directory, "FFFDirectory" },
 				}
 			end,
 		} or nil,
@@ -130,7 +135,6 @@ return {
 
 		vim.keymap.set("n", "<leader>r", function()
 			builtin.lsp_references(decorate_config({
-				additional_args = { '-l' },
 				path_display = { "hidden" },
 				sorting_strategy = "ascending",
 				group_by = true,
