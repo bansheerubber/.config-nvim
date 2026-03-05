@@ -123,6 +123,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		local opts = { buffer = args.buf, remap = false }
 
+		-- SEE TELESCOPE FOR MORE LSP KEYMAPS
+
 		vim.keymap.set("n", "gd", function()
 			vim.lsp.buf.definition({ reuse_win = true })
 		end, opts)
@@ -147,10 +149,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		vim.keymap.set("n", "<leader>.", function()
 			vim.lsp.buf.code_action()
-		end, opts)
-
-		vim.keymap.set("n", "<leader>r", function()
-			vim.lsp.buf.references()
 		end, opts)
 
 		vim.keymap.set("n", "<leader>n", function()

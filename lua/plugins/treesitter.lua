@@ -1,9 +1,14 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
 	lazy = false,
+	build = ":TSUpdate",
+	branch = "main",
 	config = function()
-		require("nvim-treesitter").install({
+		local treesitter = require("nvim-treesitter")
+
+		treesitter.setup()
+
+		pcall(treesitter.install, {
 			"c",
 			"lua",
 			"vim",

@@ -46,6 +46,7 @@ return {
 		hl = {
 			border = "FFFFloatBorder",
 			title = "FFFTitle",
+			directory_path = "FFFDirectory",
 		},
 	},
 	lazy = false,

@@ -135,6 +135,10 @@ return {
 					FFFTitle = {
 						fg = colors.mauve,
 					},
+					FFFDirectory = {
+						fg = colors.overlay1,
+						style = { "italic" },
+					},
 				}
 			end,
 			color_overrides = {
