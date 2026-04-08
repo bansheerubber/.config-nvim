@@ -90,6 +90,7 @@ end
 
 return {
 	"bansheerubber/telescope.nvim",
+	dir = "~/Projects/telescope.nvim",
 	dependencies = { { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim" } },
 	lazy = false,
 	config = function()
@@ -156,6 +157,10 @@ return {
 			pattern = "TelescopePreviewerLoaded",
 			callback = function()
 				vim.wo.number = true
+				vim.opt.tabstop = 2
+				vim.opt.shiftwidth = 2
+				vim.opt.softtabstop = 2
+				vim.opt.expandtab = false
 			end,
 		})
 	end,
