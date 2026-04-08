@@ -90,7 +90,6 @@ end
 
 return {
 	"bansheerubber/telescope.nvim",
-	dir = "~/Projects/telescope.nvim",
 	dependencies = { { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim" } },
 	lazy = false,
 	config = function()
