@@ -100,6 +100,7 @@ return {
 			defaults = {
 				prompt_prefix = "  ",
 				selection_caret = "  ",
+				layout_config = {},
 			},
 			extensions = {
 				file_browser = {

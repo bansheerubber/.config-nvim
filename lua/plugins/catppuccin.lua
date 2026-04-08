@@ -34,6 +34,8 @@ return {
 					FFFGitSignDeleted = { fg = colors.red },
 					FFFGitSignUntracked = { fg = colors.green },
 
+					TreesitterContextLineNumber = { fg = colors.overlay1 },
+
 					["@parameter"] = { fg = colors.maroon },
 					["@parameter.reference"] = { fg = colors.maroon },
 					["@tag.attribute.tsx"] = { fg = colors.mauve },
